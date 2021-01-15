@@ -1,0 +1,47 @@
+<p>Labour Cost Report</p>
+<div class="table-responsive-md">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">PAYROLL PROVIDER
+                <i [ngClass] = "{'fas fa-angle-up': payrollArrow, 'fas fa-angle-down': !payrollArrow}" (click)=sortInverse()></i></th>
+            <th scope="col">WORKER</th>
+            <th scope="col">COMPLAINCE SCORE</th>
+            <th scope="col" class="txt-align-r">GROSS PAY (&pound;)</th>
+            <th scope="col" class="txt-align-r">PAYROLL ADMIN (&pound;)</th>
+            <th scope="col" class="txt-align-r">LABOUR COST (&pound;)
+                <i [ngClass] = "{'fas fa-angle-up': labourCostTotalArrow, 'fas fa-angle-down': !labourCostTotalArrow}" (click)="sortByKey('labourCostTotal')"></i></th>
+            <th scope="col"></th>
+            <th scope="col" class="txt-align-r">WORK FORCE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let provider of providers">
+            <td>{{provider.name}}</td>
+            <td>{{provider.workerCount}}</td>
+            <td class="rt-brdr">
+                {{(provider.complianceStats ? provider.complianceStats.Total  : 0) | number:'1.0-0'}}%</td>
+            <td class="txt-align-r">{{provider.grossPayTotal}}</td>
+            <td class="txt-align-r">{{provider.payrollAdminTotal === 0 ? '-': provider.payrollAdminTotal}}</td>
+            <td class="txt-align-r">{{provider.labourCostTotal}}</td>
+            <td class="rw-brdr"></td>
+            <td class="txt-align-r">{{provider.rebatesTotal}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+            <tr><td style="height: 20px;"></td></tr>
+            <tr *ngFor="let provider of total">
+                <td>{{provider.name}}</td>
+                <td>{{provider.workerCount}}</td>
+                <td class="rt-brdr">
+                    {{(provider.complianceStats ? provider.complianceStats.Total  : 0) | number:'1.0-0'}}%</td>
+                <td class="txt-align-r">{{provider.grossPayTotal}}</td>
+                <td class="txt-align-r">{{provider.payrollAdminTotal === 0 ? '-': provider.payrollAdminTotal}}</td>
+                <td class="txt-align-r">{{provider.labourCostTotal}}</td>
+                <td class="rw-brdr"></td>
+                <td class="txt-align-r">{{provider.rebatesTotal}}</td>
+            
+            </tr>
+          </tfoot>
+    </table>
+</div>
